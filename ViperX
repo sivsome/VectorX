@@ -22,7 +22,7 @@ local function destroyUI()
     local player = game.Players.LocalPlayer
     local playerGui = player:FindFirstChildOfClass("PlayerGui")
     if playerGui then
-        local uiInstance = playerGui:FindFirstChild("VectorX_UI")
+        local uiInstance = playerGui:FindFirstChild("ViperX_UI")
         if uiInstance then
             uiInstance:Destroy()
         end
@@ -31,7 +31,7 @@ end
 
 -- Load UI library
 local UILibrary = loadstring(game:HttpGet("https://pastebin.com/raw/V1ca2q9s"))()
-local MainUI = UILibrary.Load("VectorX")
+local MainUI = UILibrary.Load("ViperX")
 
 -- Scripts Page
 local ScriptsPage = MainUI.AddPage("Scripts")
@@ -87,6 +87,6 @@ local DestroyUIButton = MorePage.AddButton("Destroy UI", function()
     destroyUI()
 end)
 
-warn("VectorX: Join our Discord for the latest updates!")
+warn("ViperX: Join our Discord for the latest updates!")
 wait(0.3)
-print("VectorX: Loaded Successfully!")
+print("ViperX: Loaded Successfully!")
