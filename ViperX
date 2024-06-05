@@ -18,75 +18,76 @@ local function destroyUI()
     sound.Parent = game.Workspace
     sound:Play()
 
-    -- Remove UI elements from player's screen
-    local player = game.Players.LocalPlayer
-    local playerGui = player:FindFirstChildOfClass("PlayerGui")
-    if playerGui then
-        local uiInstance = playerGui:FindFirstChild("ViperX_UI")
-        if uiInstance then
-            uiInstance:Destroy()
-        end
-    end
 end
 
 -- Load UI library
 local UILibrary = loadstring(game:HttpGet("https://pastebin.com/raw/V1ca2q9s"))()
 local MainUI = UILibrary.Load("ViperX")
 
+print("ViperX: UI Loaded")
+
 -- Scripts Page
 local ScriptsPage = MainUI.AddPage("Scripts")
 local ScriptsLabel = ScriptsPage.AddLabel("Scripts")
+
+-- Infinite Yield Button
+local ScriptsButton = ScriptsPage.AddButton("Infinite Yield", function()
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+    print("ViperX: Infinite Yield Loaded")
+    sendNotification("ViperX", "Infinite Yield Loaded")
+end)
 
 -- Games Page
 local GamesPage = MainUI.AddPage("Games")
 local GamesLabel = GamesPage.AddLabel("Games")
 
--- Infinite Yield
-local ScriptsButton = ScriptsPage.AddButton("Infinite Yield", function()
-    loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
-end)
-
 -- Player Page
 local PlayerPage = MainUI.AddPage("Player")
 local PlayerLabel = PlayerPage.AddLabel("Player")
 
--- Slider to control JumpPower
+-- Infinite Jump Dropdown
+local InfiniteJumpDropdown = PlayerPage.AddDropdown("Infinite Jump", {
+    "false",
+    "true"
+}, function(infinjump)
+    _G.infinjump = (infinjump == "true")
+    print("ViperX: Infinite Jump set to: " .. tostring(_G.infinjump))
+    sendNotification("ViperX", "Infinite Jump set to " .. tostring(_G.infinjump))
+end)
+
+-- Jump Power Slider
 local JumpPowerSlider = PlayerPage.AddSlider("Jump Power", {Min = 1, Max = 250, Def = 50}, function(Value)
     local player = game.Players.LocalPlayer
     local humanoid = player.Character and player.Character:FindFirstChildOfClass("Humanoid")
     if humanoid then
         humanoid.JumpPower = Value
+        humanoid.UseJumpPower = true
     end
 end)
 
--- Slider to control Walk Speed
+-- Walk Speed Slider
 local WalkSpeedSlider = PlayerPage.AddSlider("Walk Speed", {Min = 1, Max = 250, Def = 16}, function(Value)
     _G.HackedWalkSpeed = Value
-    local Humanoid = game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
-    if Humanoid then
-        Humanoid.WalkSpeed = _G.HackedWalkSpeed
+    local humanoid = game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
+    if humanoid then
+        humanoid.WalkSpeed = _G.HackedWalkSpeed
     end
+end)
+
+-- More Page
+local MorePage = MainUI.AddPage("More")
+local BuildLabel = MorePage.AddLabel("Build: 3")
+local VersionLabel = MorePage.AddLabel("Version: 0.1")
+local UpdatedLabel = MorePage.AddLabel("Last Updated: June 5, 2024")
+local DestroyUIButton = MorePage.AddButton("secret", function()
+    destroyUI()
+    sendNotification("ViperX", "uhhhhhh")
 end)
 
 -- Load the infinite jump script
 local infiniteJumpScript = loadstring(game:HttpGet("https://pastebin.com/raw/zE6Cfcc1"))()
+print("ViperX: Infinite Jump Script Loaded")
 
 -- Load the walk speed script
 local walkSpeedScript = loadstring(game:HttpGet("https://pastebin.com/raw/HEwGySWJ"))()
-
--- More Page
-local MorePage = MainUI.AddPage("More")
-
--- Add UI elements to More page
-local BuildLabel = MorePage.AddLabel("Build: 3")
-local VersionLabel = MorePage.AddLabel("Version: 0.1")
-local UpdatedLabel = MorePage.AddLabel("Last Updated: June 5, 2024")
-
--- Button to destroy UI
-local DestroyUIButton = MorePage.AddButton("secret", function()
-    destroyUI()
-end)
-
-warn("ViperX: Join our Discord for the latest updates!")
-wait(0.3)
-print("ViperX: Loaded Successfully!")
+print("ViperX: Walk Speed Script Loaded")
