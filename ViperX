@@ -22,7 +22,7 @@ local function destroyUI()
     local player = game.Players.LocalPlayer
     local playerGui = player:FindFirstChildOfClass("PlayerGui")
     if playerGui then
-        local uiInstance = playerGui:FindFirstChild("ViperX_UI")
+        local uiInstance = playerGui:FindFirstChild("VectorX_UI")
         if uiInstance then
             uiInstance:Destroy()
         end
@@ -31,7 +31,7 @@ end
 
 -- Load UI library
 local UILibrary = loadstring(game:HttpGet("https://pastebin.com/raw/V1ca2q9s"))()
-local MainUI = UILibrary.Load("ViperX")
+local MainUI = UILibrary.Load("VectorX")
 
 -- Scripts Page
 local ScriptsPage = MainUI.AddPage("Scripts")
@@ -50,24 +50,12 @@ end)
 local PlayerPage = MainUI.AddPage("Player")
 local PlayerLabel = PlayerPage.AddLabel("Player")
 
--- Add UI elements to Player page
-local InfiniteJumpDropdown = PlayerPage.AddDropdown("Infinite Jump", {
-    "false",
-    "true"
-}, function(infinjump)
-    _G.infinjump = (infinjump == "true")
-    print("Infinite Jump set to: " .. tostring(_G.infinjump))
-    sendNotification("Infinite Jump set to: " .. tostring(_G.infinjump))
-end)
-
 -- Slider to control JumpPower
 local JumpPowerSlider = PlayerPage.AddSlider("Jump Power", {Min = 1, Max = 250, Def = 50}, function(Value)
     local player = game.Players.LocalPlayer
     local humanoid = player.Character and player.Character:FindFirstChildOfClass("Humanoid")
     if humanoid then
         humanoid.JumpPower = Value
-        print("Jump Power set to: " .. tostring(Value))
-        sendNotification("Jump Power set to: " .. tostring(Value))
     end
 end)
 
@@ -78,8 +66,6 @@ local WalkSpeedSlider = PlayerPage.AddSlider("Walk Speed", {Min = 1, Max = 250, 
     if Humanoid then
         Humanoid.WalkSpeed = _G.HackedWalkSpeed
     end
-    print("Walk Speed set to: " .. tostring(Value))
-    sendNotification("Walk Speed set to: " .. tostring(Value))
 end)
 
 -- Load the infinite jump script
@@ -92,11 +78,11 @@ local walkSpeedScript = loadstring(game:HttpGet("https://pastebin.com/raw/HEwGyS
 local MorePage = MainUI.AddPage("More")
 
 -- Add UI elements to More page
-local BuildLabel = MorePage.AddLabel("Build: 3")
+local BuildLabel = MorePage.AddLabel("Build: 2")
 local VersionLabel = MorePage.AddLabel("Version: 0.1")
 local UpdatedLabel = MorePage.AddLabel("Last Updated: June 5, 2024")
 
 -- Button to destroy UI
-local DestroyUIButton = MorePage.AddButton("secret", function()
+local DestroyUIButton = MorePage.AddButton("Destroy UI", function()
     destroyUI()
 end)
