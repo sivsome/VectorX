@@ -86,3 +86,7 @@ local UpdatedLabel = MorePage.AddLabel("Last Updated: June 5, 2024")
 local DestroyUIButton = MorePage.AddButton("Destroy UI", function()
     destroyUI()
 end)
+
+warn("VectorX: Join our Discord for the latest updates!")
+wait(0.3)
+print("VectorX: Loaded Successfully!")
