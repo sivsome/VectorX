@@ -1,0 +1,105 @@
+-- Function to send notification
+local function sendNotification(title, text, duration)
+    game.StarterGui:SetCore("SendNotification", {
+        Title = title;
+        Text = text;
+        Button1 = "Dismiss";
+        Icon = "rbxassetid://17738538103";
+        Duration = duration or 7; -- Default duration is 7 seconds
+    })
+end
+
+-- Function to destroy UI and play sound effect
+local function destroyUI()
+    -- Play sound effect
+    local soundId = "rbxassetid://7933571710"
+    local sound = Instance.new("Sound")
+    sound.SoundId = soundId
+    sound.Parent = game.Workspace
+    sound:Play()
+
+    -- Remove UI elements from player's screen
+    local player = game.Players.LocalPlayer
+    local playerGui = player:FindFirstChildOfClass("PlayerGui")
+    if playerGui then
+        local uiInstance = playerGui:FindFirstChild("VectorX_UI")
+        if uiInstance then
+            uiInstance:Destroy()
+        end
+    end
+end
+
+-- Load UI library
+local UILibrary = loadstring(game:HttpGet("https://pastebin.com/raw/V1ca2q9s"))()
+local MainUI = UILibrary.Load("VectorX")
+
+-- Send startup notification
+sendNotification("VectorX", "Successfully Executed.")
+
+-- Scripts Page
+local ScriptsPage = MainUI.AddPage("Scripts")
+local ScriptsLabel = ScriptsPage.AddLabel("Scripts")
+
+-- Games Page
+local GamesPage = MainUI.AddPage("Games")
+local GamesLabel = GamesPage.AddLabel("Games")
+
+-- Infinite Yield
+local ScriptsButton = ScriptsPage.AddButton("Infinite Yield", function()
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+end)
+
+-- Player Page
+local PlayerPage = MainUI.AddPage("Player")
+local PlayerLabel = PlayerPage.AddLabel("Player")
+
+-- Add UI elements to Player page
+local InfiniteJumpDropdown = PlayerPage.AddDropdown("Infinite Jump", {
+    "false",
+    "true"
+}, function(infinjump)
+    _G.infinjump = (infinjump == "true")
+    print("Infinite Jump set to: " .. tostring(_G.infinjump))
+    sendNotification("Infinite Jump set to: " .. tostring(_G.infinjump))
+end)
+
+-- Slider to control JumpPower
+local JumpPowerSlider = PlayerPage.AddSlider("Jump Power", {Min = 1, Max = 250, Def = 50}, function(Value)
+    local player = game.Players.LocalPlayer
+    local humanoid = player.Character and player.Character:FindFirstChildOfClass("Humanoid")
+    if humanoid then
+        humanoid.JumpPower = Value
+        print("Jump Power set to: " .. tostring(Value))
+        sendNotification("Jump Power set to: " .. tostring(Value))
+    end
+end)
+
+-- Slider to control Walk Speed
+local WalkSpeedSlider = PlayerPage.AddSlider("Walk Speed", {Min = 1, Max = 250, Def = 16}, function(Value)
+    _G.HackedWalkSpeed = Value
+    local Humanoid = game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
+    if Humanoid then
+        Humanoid.WalkSpeed = _G.HackedWalkSpeed
+    end
+    print("Walk Speed set to: " .. tostring(Value))
+    sendNotification("Walk Speed set to: " .. tostring(Value))
+end)
+
+-- Load the infinite jump script
+local infiniteJumpScript = loadstring(game:HttpGet("https://pastebin.com/raw/zE6Cfcc1"))()
+
+-- Load the walk speed script
+local walkSpeedScript = loadstring(game:HttpGet("https://pastebin.com/raw/HEwGySWJ"))()
+
+-- More Page
+local MorePage = MainUI.AddPage("More")
+
+-- Add UI elements to More page
+local BuildLabel = MorePage.AddLabel("Build: 2")
+local VersionLabel = MorePage.AddLabel("Version: 0.1")
+local UpdatedLabel = MorePage.AddLabel("Last Updated: June 5, 2024")
+
+-- Button to destroy UI
+local DestroyUIButton = MorePage.AddButton("Destroy UI", function()
+    destroyUI()
+end)
