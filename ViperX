@@ -78,7 +78,7 @@ local walkSpeedScript = loadstring(game:HttpGet("https://pastebin.com/raw/HEwGyS
 local MorePage = MainUI.AddPage("More")
 
 -- Add UI elements to More page
-local BuildLabel = MorePage.AddLabel("Build: 2")
+local BuildLabel = MorePage.AddLabel("Build: 3")
 local VersionLabel = MorePage.AddLabel("Version: 0.1")
 local UpdatedLabel = MorePage.AddLabel("Last Updated: June 5, 2024")
 
