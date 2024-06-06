@@ -1,3 +1,7 @@
+-- VectorX
+-- Build: 6
+-- Version: 0.1
+
 -- Function to send notification
 local function sendNotification(title, text, duration)
     game.StarterGui:SetCore("SendNotification", {
@@ -9,14 +13,66 @@ local function sendNotification(title, text, duration)
     })
 end
 
+-- Function to play sound
+local function playSound(soundId)
+    local sound = Instance.new("Sound")
+    sound.SoundId = "rbxassetid://" .. soundId
+    sound.Parent = game.Workspace
+    sound:Play()
+    sound.Ended:Connect(function()
+        sound:Destroy()
+    end)
+end
+
+-- Function to check GUI visibility and send notification
+local function checkGUIVisibilityAndNotify()
+    local coreGui = game:GetService("CoreGui")
+    local viperX = coreGui:FindFirstChild("ViperX") -- Replace with the actual name of your CoreGui
+
+    if viperX then
+        playSound(6895079853)
+    end
+end
+
+-- Function to toggle GUI visibility
+local function toggleGUI()
+    local coreGui = game:GetService("CoreGui")
+    local viperX = coreGui:FindFirstChild("ViperX") -- Replace with the actual name of your CoreGui
+
+    if viperX then
+        viperX.Enabled = not viperX.Enabled
+        checkGUIVisibilityAndNotify()
+    end
+end
+
+-- Ensure no duplicate keybind connections
+local function connectKeybind()
+    local UIS = game:GetService("UserInputService")
+
+    local connection
+    connection = UIS.InputBegan:Connect(function(input, gameProcessed)
+        if not gameProcessed then
+            if input.KeyCode == Enum.KeyCode.G then
+                toggleGUI()
+            end
+        end
+    end)
+
+    return connection
+end
+
+-- Disconnect previous connections if they exist
+if _G.viperXKeybindConnection then
+    _G.viperXKeybindConnection:Disconnect()
+end
+
+-- Create a new keybind connection and store it in a global variable
+_G.viperXKeybindConnection = connectKeybind()
+
 -- Function to destroy UI and play sound effect
 local function destroyUI()
     -- Play sound effect
-    local soundId = "rbxassetid://12221984"
-    local sound = Instance.new("Sound")
-    sound.SoundId = soundId
-    sound.Parent = game.Workspace
-    sound:Play()
+    playSound(12221984)
 end
 
 -- Play sound when the script begins
@@ -30,8 +86,8 @@ local UILibrary = loadstring(game:HttpGet("https://pastebin.com/raw/V1ca2q9s"))(
 local MainUI = UILibrary.Load("ViperX")
 
 if MainUI then
-    print("ViperX: UI Loaded")
-    sendNotification("ViperX", "UI Successfully Loaded")
+    print("ViperX: Loaded")
+    sendNotification("ViperX", "Successfully Loaded")
 
     -- Scripts Page
     local ScriptsPage = MainUI.AddPage("Scripts")
@@ -44,19 +100,19 @@ if MainUI then
         sendNotification("ViperX", "Infinite Yield Loaded")
     end)
 
-        -- Aimbot 3.0 Button
+    -- Aimbot 3.0 Button
     local ScriptsButton = ScriptsPage.AddButton("Aimbot 3.0", function()
         loadstring(game:HttpGet('https://raw.githubusercontent.com/sivsome/ViperX/main/Aimbot%203.0'))()
         sendNotification("ViperX", "Aimbot 3.0 loaded")
     end)
 
-        -- FullBright Button
+    -- FullBright Button
     local ScriptsButton = ScriptsPage.AddButton("FullBright", function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/sivsome/ViperX/main/FullBright"))()
         sendNotification("ViperX", "FullBright activated")
     end)
 
-            -- FPS Boost Button
+    -- FPS Boost Button
     local ScriptsButton = ScriptsPage.AddButton("FPS Boost", function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/sivsome/ViperX/main/FPS%20Boost"))()
         sendNotification("ViperX", "FPS Boost activated")
@@ -94,48 +150,47 @@ if MainUI then
         sendNotification("ViperX", "Prison Life GUI loaded")
     end)
 
-        -- MM2 Button
+    -- MM2 Button
     local PLButton = GamesPage.AddButton("Murder Mystery 2", function()
         loadstring(game:HttpGet(('https://raw.githubusercontent.com/MarsQQ/ScriptHubScripts/master/MM2%20Admin%20Panel'),true))()
         sendNotification("ViperX", "Murder Mystery GUI loaded")
     end)
 
-            -- Backpacking Button
+    -- Backpacking Button
     local PLButton = GamesPage.AddButton("Backpacking", function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/sivsome/ViperX/main/Backpacking"))()
         sendNotification("ViperX", "Backpacking GUI loaded")
     end)
 
-                -- Build a Boat for Treasure Button
+    -- Build a Boat for Treasure Button
     local PLButton = GamesPage.AddButton("Build A Boat For Treasure", function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/sivsome/ViperX/main/Build%20A%20Boat%20For%20Treasure"))()
         sendNotification("ViperX", "Build A Boat For Treasure GUI loaded")
     end)
 
-                -- Flee The Facility Button
+    -- Flee The Facility Button
     local PLButton = GamesPage.AddButton("Flee The Facility", function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/sivsome/ViperX/main/Flee%20The%20Facility"))()
-        sendNotification("ViperX", "Flle The Facility GUI loaded")
+        sendNotification("ViperX", "Flee The Facility GUI loaded")
     end)
 
-                    -- Bloxhunt Button
+    -- Bloxhunt Button
     local PLButton = GamesPage.AddButton("Bloxhunt", function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/Denverrz/scripts/master/BLOXWARE_v1.0.txt", true))()
         sendNotification("ViperX", "Bloxhunt GUI loaded (BLOXWARE v1.0)")
     end)
 
-                        -- Prison Life Button
+    -- Prison Life Button
     local PLButton = GamesPage.AddButton("Prison Life", function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/Denverrz/scripts/master/PRISONWARE_v1.3.txt"))();
         sendNotification("ViperX", "Prison Life GUI loaded (PRISONWARE v1.3)")
     end)
 
-                            -- Broken Bones IV Button
+    -- Broken Bones IV Button
     local PLButton = GamesPage.AddButton("Broken Bones IV", function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/sivsome/ViperX/main/Broken%20Bones%20IV"))()
         sendNotification("ViperX", "Broken Bones IV GUI loaded")
     end)
-
 
     -- Player Page
     local PlayerPage = MainUI.AddPage("Player")
@@ -175,7 +230,6 @@ if MainUI then
 
     -- Load the infinite jump script
     local infiniteJumpScript = loadstring(game:HttpGet("https://pastebin.com/raw/zE6Cfcc1"))()
-    print("ViperX: Infinite Jump Script Loaded")
     
     -- More Page
     local MorePage = MainUI.AddPage("More")
@@ -188,5 +242,5 @@ if MainUI then
         game:GetService("CoreGui"):WaitForChild("ViperX"):Remove()
     end)
 else
-    warn("ViperX: Failed to load UI.")
+    warn("ViperX: Failed to load.")
 end
