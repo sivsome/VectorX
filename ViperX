@@ -121,9 +121,8 @@ if MainUI then
     local BuildLabel = MorePage.AddLabel("Build: 4")
     local VersionLabel = MorePage.AddLabel("Version: 0.1")
     local UpdatedLabel = MorePage.AddLabel("Last Updated: June 5, 2024")
-    local DestroyUIButton = MorePage.AddButton("Destroy UI", function()
+    local DestroyUIButton = MorePage.AddButton("secret", function()
         destroyUI()
-        sendNotification("ViperX", "UI Destroyed")
     end)
 else
     warn("ViperX: Failed to load UI library.")
