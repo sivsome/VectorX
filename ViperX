@@ -12,7 +12,7 @@ end
 -- Function to destroy UI and play sound effect
 local function destroyUI()
     -- Play sound effect
-    local soundId = "rbxassetid://7933571710"
+    local soundId = "rbxassetid://12221984"
     local sound = Instance.new("Sound")
     sound.SoundId = soundId
     sound.Parent = game.Workspace
@@ -42,6 +42,24 @@ if MainUI then
         loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
         print("ViperX: Infinite Yield Loaded")
         sendNotification("ViperX", "Infinite Yield Loaded")
+    end)
+
+        -- Aimbot 3.0 Button
+    local ScriptsButton = ScriptsPage.AddButton("Aimbot 3.0", function()
+        loadstring(game:HttpGet('https://raw.githubusercontent.com/sivsome/ViperX/main/Aimbot%203.0'))()
+        sendNotification("ViperX", "Aimbot 3.0 loaded")
+    end)
+
+        -- FullBright Button
+    local ScriptsButton = ScriptsPage.AddButton("FullBright", function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/sivsome/ViperX/main/FullBright"))()
+        sendNotification("ViperX", "FullBright activated")
+    end)
+
+            -- FPS Boost Button
+    local ScriptsButton = ScriptsPage.AddButton("FPS Boost", function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/sivsome/ViperX/main/FPS%20Boost"))()
+        sendNotification("ViperX", "FPS Boost activated")
     end)
 
     -- Client Page
@@ -75,6 +93,49 @@ if MainUI then
         loadstring(game:HttpGet("https://raw.githubusercontent.com/sivsome/ViperX/main/Prison%20Life%20GUI"))()
         sendNotification("ViperX", "Prison Life GUI loaded")
     end)
+
+        -- MM2 Button
+    local PLButton = GamesPage.AddButton("Murder Mystery 2", function()
+        loadstring(game:HttpGet(('https://raw.githubusercontent.com/MarsQQ/ScriptHubScripts/master/MM2%20Admin%20Panel'),true))()
+        sendNotification("ViperX", "Murder Mystery GUI loaded")
+    end)
+
+            -- Backpacking Button
+    local PLButton = GamesPage.AddButton("Backpacking", function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/sivsome/ViperX/main/Backpacking"))()
+        sendNotification("ViperX", "Backpacking GUI loaded")
+    end)
+
+                -- Build a Boat for Treasure Button
+    local PLButton = GamesPage.AddButton("Build A Boat For Treasure", function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/sivsome/ViperX/main/Build%20A%20Boat%20For%20Treasure"))()
+        sendNotification("ViperX", "Build A Boat For Treasure GUI loaded")
+    end)
+
+                -- Flee The Facility Button
+    local PLButton = GamesPage.AddButton("Flee The Facility", function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/sivsome/ViperX/main/Flee%20The%20Facility"))()
+        sendNotification("ViperX", "Flle The Facility GUI loaded")
+    end)
+
+                    -- Bloxhunt Button
+    local PLButton = GamesPage.AddButton("Bloxhunt", function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Denverrz/scripts/master/BLOXWARE_v1.0.txt", true))()
+        sendNotification("ViperX", "Bloxhunt GUI loaded (BLOXWARE v1.0)")
+    end)
+
+                        -- Prison Life Button
+    local PLButton = GamesPage.AddButton("Prison Life", function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Denverrz/scripts/master/PRISONWARE_v1.3.txt"))();
+        sendNotification("ViperX", "Prison Life GUI loaded (PRISONWARE v1.3)")
+    end)
+
+                            -- Broken Bones IV Button
+    local PLButton = GamesPage.AddButton("Broken Bones IV", function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/sivsome/ViperX/main/Broken%20Bones%20IV"))()
+        sendNotification("ViperX", "Broken Bones IV GUI loaded")
+    end)
+
 
     -- Player Page
     local PlayerPage = MainUI.AddPage("Player")
@@ -118,12 +179,14 @@ if MainUI then
     
     -- More Page
     local MorePage = MainUI.AddPage("More")
-    local BuildLabel = MorePage.AddLabel("Build: 4")
+    local BuildLabel = MorePage.AddLabel("Build: 5")
     local VersionLabel = MorePage.AddLabel("Version: 0.1")
-    local UpdatedLabel = MorePage.AddLabel("Last Updated: June 5, 2024")
-    local DestroyUIButton = MorePage.AddButton("secret", function()
+    local UpdatedLabel = MorePage.AddLabel("Last Updated: June 6, 2024")
+    local DestroyUIButton = MorePage.AddButton("Destroy UI", function()
         destroyUI()
+        warn("ViperX: UI Destroyed")
+        game:GetService("CoreGui"):WaitForChild("ViperX"):Remove()
     end)
 else
-    warn("ViperX: Failed to load UI library.")
+    warn("ViperX: Failed to load UI.")
 end
