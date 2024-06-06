@@ -1,0 +1,208 @@
+
+-- Gui to Lua
+-- Version: 3.1
+
+-- Instances:
+
+local BackpackingBeta = Instance.new("ScreenGui")
+local AutoFarm = Instance.new("Frame")
+local AutoFarmTittle = Instance.new("TextButton")
+local AutoMallows = Instance.new("TextButton")
+local Credits = Instance.new("Frame")
+local CreditsTittle = Instance.new("TextButton")
+local Credits1 = Instance.new("TextLabel")
+local Credits2 = Instance.new("TextLabel")
+local Miscs = Instance.new("Frame")
+local MiscsTittle = Instance.new("TextButton")
+local AntiAfk = Instance.new("TextButton")
+local DeleteGui = Instance.new("TextButton")
+
+--Properties:
+
+BackpackingBeta.Name = "Backpacking Beta"
+BackpackingBeta.Parent = game.CoreGui
+
+AutoFarm.Name = "AutoFarm"
+AutoFarm.Parent = BackpackingBeta
+AutoFarm.Active = true
+AutoFarm.BackgroundColor3 = Color3.fromRGB(97, 58, 11)
+AutoFarm.BorderColor3 = Color3.fromRGB(226, 154, 11)
+AutoFarm.BorderSizePixel = 3
+AutoFarm.Position = UDim2.new(0, 14, 0, 20)
+AutoFarm.Size = UDim2.new(0, 150, 0, 55)
+AutoFarm.Draggable = true
+
+AutoFarmTittle.Name = "AutoFarm Tittle"
+AutoFarmTittle.Parent = AutoFarm
+AutoFarmTittle.BackgroundColor3 = Color3.fromRGB(97, 58, 11)
+AutoFarmTittle.BorderColor3 = Color3.fromRGB(226, 154, 11)
+AutoFarmTittle.BorderSizePixel = 3
+AutoFarmTittle.Size = UDim2.new(0, 150, 0, 25)
+AutoFarmTittle.Font = Enum.Font.Cartoon
+AutoFarmTittle.Text = "AutoFarm"
+AutoFarmTittle.TextColor3 = Color3.fromRGB(0, 0, 0)
+AutoFarmTittle.TextScaled = true
+AutoFarmTittle.TextSize = 14.000
+AutoFarmTittle.TextWrapped = true
+
+AutoMallows.Name = "AutoMallows"
+AutoMallows.Parent = AutoFarm
+AutoMallows.BackgroundColor3 = Color3.fromRGB(97, 58, 11)
+AutoMallows.BorderSizePixel = 0
+AutoMallows.Position = UDim2.new(0, 1, 0, 29)
+AutoMallows.Size = UDim2.new(0, 148, 0, 25)
+AutoMallows.Font = Enum.Font.Cartoon
+AutoMallows.Text = "Auto Mallows"
+AutoMallows.TextColor3 = Color3.fromRGB(0, 0, 0)
+AutoMallows.TextSize = 16.000
+
+Credits.Name = "Credits"
+Credits.Parent = BackpackingBeta
+Credits.Active = true
+Credits.BackgroundColor3 = Color3.fromRGB(97, 58, 11)
+Credits.BorderColor3 = Color3.fromRGB(226, 154, 11)
+Credits.BorderSizePixel = 3
+Credits.Position = UDim2.new(0, 353, 0, 20)
+Credits.Size = UDim2.new(0, 150, 0, 80)
+Credits.Draggable = true
+
+CreditsTittle.Name = "Credits Tittle"
+CreditsTittle.Parent = Credits
+CreditsTittle.BackgroundColor3 = Color3.fromRGB(97, 58, 11)
+CreditsTittle.BorderColor3 = Color3.fromRGB(226, 154, 11)
+CreditsTittle.BorderSizePixel = 3
+CreditsTittle.Size = UDim2.new(0, 150, 0, 25)
+CreditsTittle.Font = Enum.Font.Cartoon
+CreditsTittle.Text = "Credits"
+CreditsTittle.TextColor3 = Color3.fromRGB(0, 0, 0)
+CreditsTittle.TextScaled = true
+CreditsTittle.TextSize = 14.000
+CreditsTittle.TextWrapped = true
+
+Credits1.Name = "Credits1"
+Credits1.Parent = Credits
+Credits1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Credits1.BackgroundTransparency = 1.000
+Credits1.Position = UDim2.new(0, 1, 0, 29)
+Credits1.Size = UDim2.new(0, 148, 0, 25)
+Credits1.Font = Enum.Font.Cartoon
+Credits1.Text = "Gui and Scripts by"
+Credits1.TextColor3 = Color3.fromRGB(0, 0, 0)
+Credits1.TextSize = 16.000
+Credits1.TextWrapped = true
+
+Credits2.Name = "Credits2"
+Credits2.Parent = Credits
+Credits2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Credits2.BackgroundTransparency = 1.000
+Credits2.Position = UDim2.new(0, 1, 0, 55)
+Credits2.Size = UDim2.new(0, 148, 0, 25)
+Credits2.Font = Enum.Font.Cartoon
+Credits2.Text = "Altix#5997"
+Credits2.TextColor3 = Color3.fromRGB(0, 0, 0)
+Credits2.TextSize = 16.000
+Credits2.TextWrapped = true
+
+Miscs.Name = "Miscs"
+Miscs.Parent = BackpackingBeta
+Miscs.Active = true
+Miscs.BackgroundColor3 = Color3.fromRGB(97, 58, 11)
+Miscs.BorderColor3 = Color3.fromRGB(226, 154, 11)
+Miscs.BorderSizePixel = 3
+Miscs.Position = UDim2.new(0, 184, 0, 20)
+Miscs.Size = UDim2.new(0, 150, 0, 80)
+Miscs.Draggable = true
+
+MiscsTittle.Name = "Miscs Tittle"
+MiscsTittle.Parent = Miscs
+MiscsTittle.BackgroundColor3 = Color3.fromRGB(97, 58, 11)
+MiscsTittle.BorderColor3 = Color3.fromRGB(226, 154, 11)
+MiscsTittle.BorderSizePixel = 3
+MiscsTittle.Size = UDim2.new(0, 150, 0, 25)
+MiscsTittle.Font = Enum.Font.Cartoon
+MiscsTittle.Text = "Miscs"
+MiscsTittle.TextColor3 = Color3.fromRGB(0, 0, 0)
+MiscsTittle.TextScaled = true
+MiscsTittle.TextSize = 14.000
+MiscsTittle.TextWrapped = true
+
+AntiAfk.Name = "Anti-Afk"
+AntiAfk.Parent = Miscs
+AntiAfk.BackgroundColor3 = Color3.fromRGB(97, 58, 11)
+AntiAfk.BorderSizePixel = 0
+AntiAfk.Position = UDim2.new(0, 1, 0, 29)
+AntiAfk.Size = UDim2.new(0, 148, 0, 25)
+AntiAfk.Font = Enum.Font.Cartoon
+AntiAfk.Text = "Anti Afk"
+AntiAfk.TextColor3 = Color3.fromRGB(0, 0, 0)
+AntiAfk.TextSize = 16.000
+
+DeleteGui.Name = "Delete Gui"
+DeleteGui.Parent = Miscs
+DeleteGui.BackgroundColor3 = Color3.fromRGB(97, 58, 11)
+DeleteGui.BorderSizePixel = 0
+DeleteGui.Position = UDim2.new(0, 1, 0, 54)
+DeleteGui.Size = UDim2.new(0, 148, 0, 25)
+DeleteGui.Font = Enum.Font.Cartoon
+DeleteGui.Text = "Delete Gui"
+DeleteGui.TextColor3 = Color3.fromRGB(0, 0, 0)
+DeleteGui.TextSize = 16.000
+
+
+AutoFarmTittle.MouseButton1Down:connect(function()
+	if AutoFarm.Size == UDim2.new(0, 150, 0, 55) then
+		AutoFarm.Size = UDim2.new(0, 150, 0, 25)
+		AutoMallows.Visible = false
+	else
+		AutoFarm.Size = UDim2.new(0, 150, 0, 55)
+		AutoMallows.Visible = true
+	end
+end)
+
+AutoMallows.MouseButton1Down:connect(function()
+	if AutoMallows.TextColor3 == Color3.fromRGB(0, 0, 0) then
+		local playerss = game:GetService("Players").LocalPlayer.Name
+		local Event = game:GetService("Workspace").PlayerCampingItems[playerss].MallowMachine.MallowScript.RetrieveEvent
+		local Time = 1
+		AutoMallows.TextColor3 = Color3.fromRGB(0, 160, 0)
+		while true do
+			wait(Time)
+			Event:FireServer()
+		end
+	end
+end)
+
+CreditsTittle.MouseButton1Down:connect(function()
+	if Credits.Size == UDim2.new(0, 150, 0, 80) then
+		Credits.Size = UDim2.new(0, 150, 0, 25)
+		Credits1.Visible = false
+		Credits2.Visible = false
+	else
+		Credits.Size = UDim2.new(0, 150, 0, 80)
+		Credits1.Visible = true
+		Credits2.Visible = true
+	end
+end)
+
+MiscsTittle.MouseButton1Down:connect(function()
+	if Miscs.Size == UDim2.new(0, 150, 0, 80) then
+		Miscs.Size = UDim2.new(0, 150, 0, 25)
+		AntiAfk.Visible = false
+		DeleteGui.Visible = false
+	else
+		Miscs.Size = UDim2.new(0, 150, 0, 80)
+		AntiAfk.Visible = true
+		DeleteGui.Visible = true
+	end
+end)
+
+AntiAfk.MouseButton1Down:connect(function()
+	if AntiAfk.TextColor3 == Color3.fromRGB(0, 0, 0) then
+		loadstring(game:HttpGet("https://pastebin.com/raw/L2E6ft9L", true))()
+		AntiAfk.TextColor3 = Color3.fromRGB(0, 160, 0)
+	end
+end)
+
+DeleteGui.MouseButton1Down:connect(function()
+	game:GetService("CoreGui"):WaitForChild("Backpacking Beta"):Remove()
+end)
