@@ -24,8 +24,8 @@ local function playSound(soundId)
     end)
 end
 
--- Function to check GUI visibility and send notification
-local function checkGUIVisibilityAndNotify()
+-- Function to check GUI visibility
+local function checkGUIVisibility()
     local coreGui = game:GetService("CoreGui")
     local viperX = coreGui:FindFirstChild("ViperX") -- Replace with the actual name of your CoreGui
 
@@ -41,7 +41,7 @@ local function toggleGUI()
 
     if viperX then
         viperX.Enabled = not viperX.Enabled
-        checkGUIVisibilityAndNotify()
+        checkGUIVisibility()
     end
 end
 
@@ -228,12 +228,23 @@ if MainUI then
         sendNotification("ViperX", "Wall Walk activated")
     end)
 
+    -- FOV Slider
+    local FOVSlider = PlayerPage.AddSlider("FOV", {Min = 50, Max = 110, Def = 70}, function(Value)
+        game:GetService('Workspace').Camera.FieldOfView = Value
+    end)
+
+    -- Reset FOV Button
+    local ResetFOVButton = PlayerPage.AddButton("Reset FOV", function()
+        game:GetService('Workspace').Camera.FieldOfView = 70 -- Reset FOV to default
+    end)
+
+
     -- Load the infinite jump script
     local infiniteJumpScript = loadstring(game:HttpGet("https://pastebin.com/raw/zE6Cfcc1"))()
     
     -- More Page
     local MorePage = MainUI.AddPage("More")
-    local BuildLabel = MorePage.AddLabel("Build: 5")
+    local BuildLabel = MorePage.AddLabel("Build: 6")
     local VersionLabel = MorePage.AddLabel("Version: 0.1")
     local UpdatedLabel = MorePage.AddLabel("Last Updated: June 6, 2024")
     local DestroyUIButton = MorePage.AddButton("Destroy UI", function()
