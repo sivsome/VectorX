@@ -1,5 +1,5 @@
 -- VectorX
--- Build: 6
+-- Build: 7
 -- Version: 0.1
 
 -- Function to send notification
@@ -24,8 +24,8 @@ local function playSound(soundId)
     end)
 end
 
--- Function to check GUI visibility
-local function checkGUIVisibility()
+-- Function to check GUI visibility and send notification
+local function checkGUIVisibilityAndNotify()
     local coreGui = game:GetService("CoreGui")
     local viperX = coreGui:FindFirstChild("ViperX") -- Replace with the actual name of your CoreGui
 
@@ -41,7 +41,7 @@ local function toggleGUI()
 
     if viperX then
         viperX.Enabled = not viperX.Enabled
-        checkGUIVisibility()
+        checkGUIVisibilityAndNotify()
     end
 end
 
@@ -54,6 +54,8 @@ local function connectKeybind()
         if not gameProcessed then
             if input.KeyCode == Enum.KeyCode.G then
                 toggleGUI()
+            elseif input.UserInputType == Enum.UserInputType.MouseButton1 and UIS:IsKeyDown(Enum.KeyCode.LeftControl) then
+                loadstring(game:HttpGet("https://raw.githubusercontent.com/sivsome/ViperX/main/Ctrl%2BClick%20TP"))()
             end
         end
     end)
@@ -118,6 +120,12 @@ if MainUI then
         sendNotification("ViperX", "FPS Boost activated")
     end)
 
+    -- Wall Walk Button
+    local WallWalkButton = ScriptsPage.AddButton("Wall Walk", function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/sivsome/ViperX/main/Wall%20Walk"))()
+        sendNotification("ViperX", "Wall Walk activated")
+    end)
+
     -- Client Page
     local ClientPage = MainUI.AddPage("Client")
     local ClientLabel = ClientPage.AddLabel("Client")
@@ -150,44 +158,44 @@ if MainUI then
         sendNotification("ViperX", "Prison Life GUI loaded")
     end)
 
-    -- MM2 Button
-    local PLButton = GamesPage.AddButton("Murder Mystery 2", function()
+-- MM2 Button
+    local MM2Button = GamesPage.AddButton("Murder Mystery 2", function()
         loadstring(game:HttpGet(('https://raw.githubusercontent.com/MarsQQ/ScriptHubScripts/master/MM2%20Admin%20Panel'),true))()
         sendNotification("ViperX", "Murder Mystery GUI loaded")
     end)
 
     -- Backpacking Button
-    local PLButton = GamesPage.AddButton("Backpacking", function()
+    local BackpackingButton = GamesPage.AddButton("Backpacking", function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/sivsome/ViperX/main/Backpacking"))()
         sendNotification("ViperX", "Backpacking GUI loaded")
     end)
 
     -- Build a Boat for Treasure Button
-    local PLButton = GamesPage.AddButton("Build A Boat For Treasure", function()
+    local BuildABoatButton = GamesPage.AddButton("Build A Boat For Treasure", function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/sivsome/ViperX/main/Build%20A%20Boat%20For%20Treasure"))()
         sendNotification("ViperX", "Build A Boat For Treasure GUI loaded")
     end)
 
     -- Flee The Facility Button
-    local PLButton = GamesPage.AddButton("Flee The Facility", function()
+    local FleeTheFacilityButton = GamesPage.AddButton("Flee The Facility", function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/sivsome/ViperX/main/Flee%20The%20Facility"))()
         sendNotification("ViperX", "Flee The Facility GUI loaded")
     end)
 
     -- Bloxhunt Button
-    local PLButton = GamesPage.AddButton("Bloxhunt", function()
+    local BloxhuntButton = GamesPage.AddButton("Bloxhunt", function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/Denverrz/scripts/master/BLOXWARE_v1.0.txt", true))()
         sendNotification("ViperX", "Bloxhunt GUI loaded (BLOXWARE v1.0)")
     end)
 
     -- Prison Life Button
-    local PLButton = GamesPage.AddButton("Prison Life", function()
+    local PrisonLifeButton = GamesPage.AddButton("Prison Life", function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/Denverrz/scripts/master/PRISONWARE_v1.3.txt"))();
         sendNotification("ViperX", "Prison Life GUI loaded (PRISONWARE v1.3)")
     end)
 
     -- Broken Bones IV Button
-    local PLButton = GamesPage.AddButton("Broken Bones IV", function()
+    local BrokenBonesButton = GamesPage.AddButton("Broken Bones IV", function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/sivsome/ViperX/main/Broken%20Bones%20IV"))()
         sendNotification("ViperX", "Broken Bones IV GUI loaded")
     end)
@@ -222,29 +230,25 @@ if MainUI then
         end
     end)
 
-    -- Wall Walk Button
-    local WallWalkButton = PlayerPage.AddButton("Wall Walk", function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/sivsome/ViperX/main/Wall%20Walk"))()
-        sendNotification("ViperX", "Wall Walk activated")
-    end)
-
     -- FOV Slider
-    local FOVSlider = PlayerPage.AddSlider("FOV", {Min = 50, Max = 110, Def = 70}, function(Value)
+    local FOVSlider = PlayerPage.AddSlider("FOV", {Min = 50, Max = 110, Def = game:GetService('Workspace').Camera.FieldOfView}, function(Value)
         game:GetService('Workspace').Camera.FieldOfView = Value
     end)
 
     -- Reset FOV Button
     local ResetFOVButton = PlayerPage.AddButton("Reset FOV", function()
-        game:GetService('Workspace').Camera.FieldOfView = 70 -- Reset FOV to default
+        FOVSlider:SetValue(game:GetService('Workspace').Camera.FieldOfView)
     end)
 
+    -- Ctrl+Click TP Button
+    local PlayerPageButton = PlayerPage.AddButton("Ctrl + Click TP", function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/sivsome/ViperX/main/Ctrl%2BClick%20TP"))()
+        sendNotification("ViperX", "Ctrl + Click TP activated")
+    end)
 
-    -- Load the infinite jump script
-    local infiniteJumpScript = loadstring(game:HttpGet("https://pastebin.com/raw/zE6Cfcc1"))()
-    
     -- More Page
     local MorePage = MainUI.AddPage("More")
-    local BuildLabel = MorePage.AddLabel("Build: 6")
+    local BuildLabel = MorePage.AddLabel("Build: 7")
     local VersionLabel = MorePage.AddLabel("Version: 0.1")
     local UpdatedLabel = MorePage.AddLabel("Last Updated: June 6, 2024")
     local DestroyUIButton = MorePage.AddButton("Destroy UI", function()
