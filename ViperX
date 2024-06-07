@@ -90,7 +90,7 @@ local UILibrary = loadstring(game:HttpGet("https://pastebin.com/raw/V1ca2q9s"))(
 local MainUI = UILibrary.Load("ViperX")
 
 if MainUI then
-    print("ViperX: Build 7, Version 0.1")
+    print("ViperX: Build 7")
     sendNotification("ViperX", "Executed")
 
     -- Scripts Page
