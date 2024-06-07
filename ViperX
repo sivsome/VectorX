@@ -55,6 +55,8 @@ local function connectKeybind()
             if input.KeyCode == Enum.KeyCode.G then
                 toggleGUI()
             elseif input.UserInputType == Enum.UserInputType.MouseButton1 and UIS:IsKeyDown(Enum.KeyCode.LeftControl) then
+                -- Ctrl + Click TP implementation
+                -- Replace the URL below with the actual URL for the script
                 loadstring(game:HttpGet("https://raw.githubusercontent.com/sivsome/ViperX/main/Ctrl%2BClick%20TP"))()
             end
         end
@@ -95,6 +97,18 @@ if MainUI then
     local ScriptsPage = MainUI.AddPage("Scripts")
     local ScriptsLabel = ScriptsPage.AddLabel("Scripts")
 
+    -- Wall Walk Button
+    local WallWalkButton = ScriptsPage.AddButton("Wall Walk", function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/sivsome/ViperX/main/Wall%20Walk"))()
+        sendNotification("ViperX", "Wall Walk activated")
+    end)
+
+    -- Ctrl+Click TP Button
+    local CtrlClickTPButton = PlayerPage.AddButton("Ctrl+Click TP", function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/sivsome/ViperX/main/Ctrl%2BClick%20TP"))()
+        sendNotification("ViperX", "Ctrl+Click TP activated")
+    end)
+
     -- Infinite Yield Button
     local ScriptsButton = ScriptsPage.AddButton("Infinite Yield", function()
         loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
@@ -118,12 +132,6 @@ if MainUI then
     local ScriptsButton = ScriptsPage.AddButton("FPS Boost", function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/sivsome/ViperX/main/FPS%20Boost"))()
         sendNotification("ViperX", "FPS Boost activated")
-    end)
-
-    -- Wall Walk Button
-    local WallWalkButton = ScriptsPage.AddButton("Wall Walk", function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/sivsome/ViperX/main/Wall%20Walk"))()
-        sendNotification("ViperX", "Wall Walk activated")
     end)
 
     -- Client Page
@@ -158,7 +166,7 @@ if MainUI then
         sendNotification("ViperX", "Prison Life GUI loaded")
     end)
 
--- MM2 Button
+    -- MM2 Button
     local MM2Button = GamesPage.AddButton("Murder Mystery 2", function()
         loadstring(game:HttpGet(('https://raw.githubusercontent.com/MarsQQ/ScriptHubScripts/master/MM2%20Admin%20Panel'),true))()
         sendNotification("ViperX", "Murder Mystery GUI loaded")
@@ -207,6 +215,24 @@ if MainUI then
     -- Infinite Jump Toggle
     local InfiniteJumpToggle = PlayerPage.AddToggle("Infinite Jump", false, function(Value)
         _G.infinjump = Value
+
+        if _G.infinjump then
+            if not _G.infinJumpConnection then
+                _G.infinJumpConnection = game:GetService("UserInputService").JumpRequest:Connect(function()
+                    local player = game:GetService("Players").LocalPlayer
+                    local humanoid = player.Character and player.Character:FindFirstChildOfClass("Humanoid")
+                    if humanoid then
+                        humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
+                    end
+                end)
+            end
+        else
+            if _G.infinJumpConnection then
+                _G.infinJumpConnection:Disconnect()
+                _G.infinJumpConnection = nil
+            end
+        end
+
         print("ViperX: Infinite Jump set to: " .. tostring(_G.infinjump))
         sendNotification("ViperX", "Infinite Jump set to " .. tostring(_G.infinjump))
     end)
@@ -238,12 +264,6 @@ if MainUI then
     -- Reset FOV Button
     local ResetFOVButton = PlayerPage.AddButton("Reset FOV", function()
         FOVSlider:SetValue(game:GetService('Workspace').Camera.FieldOfView)
-    end)
-
-    -- Ctrl+Click TP Button
-    local PlayerPageButton = PlayerPage.AddButton("Ctrl + Click TP", function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/sivsome/ViperX/main/Ctrl%2BClick%20TP"))()
-        sendNotification("ViperX", "Ctrl + Click TP activated")
     end)
 
     -- More Page
