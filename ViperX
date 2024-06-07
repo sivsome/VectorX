@@ -97,18 +97,6 @@ if MainUI then
     local ScriptsPage = MainUI.AddPage("Scripts")
     local ScriptsLabel = ScriptsPage.AddLabel("Scripts")
 
-    -- Wall Walk Button
-    local WallWalkButton = ScriptsPage.AddButton("Wall Walk", function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/sivsome/ViperX/main/Wall%20Walk"))()
-        sendNotification("ViperX", "Wall Walk activated")
-    end)
-
-    -- Ctrl+Click TP Button
-    local CtrlClickTPButton = PlayerPage.AddButton("Ctrl+Click TP", function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/sivsome/ViperX/main/Ctrl%2BClick%20TP"))()
-        sendNotification("ViperX", "Ctrl+Click TP activated")
-    end)
-
     -- Infinite Yield Button
     local ScriptsButton = ScriptsPage.AddButton("Infinite Yield", function()
         loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
@@ -132,6 +120,18 @@ if MainUI then
     local ScriptsButton = ScriptsPage.AddButton("FPS Boost", function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/sivsome/ViperX/main/FPS%20Boost"))()
         sendNotification("ViperX", "FPS Boost activated")
+    end)
+
+    -- Ctrl+Click TP Button
+    local CtrlClickTPButton = ScriptsPage.AddButton("Ctrl + Click TP", function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/sivsome/ViperX/main/Ctrl%2BClick%20TP"))()
+        sendNotification("ViperX", "Ctrl + Click TP activated")
+    end)
+
+    -- Wall Walk Button
+    local WallWalkButton = ScriptsPage.AddButton("Wall Walk", function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/sivsome/ViperX/main/Wall%20Walk"))()
+        sendNotification("ViperX", "Wall Walk activated")
     end)
 
     -- Client Page
@@ -168,7 +168,7 @@ if MainUI then
 
     -- MM2 Button
     local MM2Button = GamesPage.AddButton("Murder Mystery 2", function()
-        loadstring(game:HttpGet(('https://raw.githubusercontent.com/MarsQQ/ScriptHubScripts/master/MM2%20Admin%20Panel'),true))()
+        loadstring(game:HttpGet('https://raw.githubusercontent.com/MarsQQ/ScriptHubScripts/master/MM2%20Admin%20Panel'))()
         sendNotification("ViperX", "Murder Mystery GUI loaded")
     end)
 
@@ -179,13 +179,13 @@ if MainUI then
     end)
 
     -- Build a Boat for Treasure Button
-    local BuildABoatButton = GamesPage.AddButton("Build A Boat For Treasure", function()
+    local BABFTButton = GamesPage.AddButton("Build A Boat For Treasure", function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/sivsome/ViperX/main/Build%20A%20Boat%20For%20Treasure"))()
         sendNotification("ViperX", "Build A Boat For Treasure GUI loaded")
     end)
 
     -- Flee The Facility Button
-    local FleeTheFacilityButton = GamesPage.AddButton("Flee The Facility", function()
+    local FTFButton = GamesPage.AddButton("Flee The Facility", function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/sivsome/ViperX/main/Flee%20The%20Facility"))()
         sendNotification("ViperX", "Flee The Facility GUI loaded")
     end)
@@ -194,12 +194,6 @@ if MainUI then
     local BloxhuntButton = GamesPage.AddButton("Bloxhunt", function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/Denverrz/scripts/master/BLOXWARE_v1.0.txt", true))()
         sendNotification("ViperX", "Bloxhunt GUI loaded (BLOXWARE v1.0)")
-    end)
-
-    -- Prison Life Button
-    local PrisonLifeButton = GamesPage.AddButton("Prison Life", function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/Denverrz/scripts/master/PRISONWARE_v1.3.txt"))();
-        sendNotification("ViperX", "Prison Life GUI loaded (PRISONWARE v1.3)")
     end)
 
     -- Broken Bones IV Button
@@ -212,29 +206,22 @@ if MainUI then
     local PlayerPage = MainUI.AddPage("Player")
     local PlayerLabel = PlayerPage.AddLabel("Player")
 
-    -- Infinite Jump Toggle
-    local InfiniteJumpToggle = PlayerPage.AddToggle("Infinite Jump", false, function(Value)
-        _G.infinjump = Value
+    -- Infinite Jump Button
+    local InfiniteJumpButton = PlayerPage.AddButton("Infinite Jump", function()
+        _G.infinjump = not _G.infinjump
 
-        if _G.infinjump then
-            if not _G.infinJumpConnection then
-                _G.infinJumpConnection = game:GetService("UserInputService").JumpRequest:Connect(function()
-                    local player = game:GetService("Players").LocalPlayer
-                    local humanoid = player.Character and player.Character:FindFirstChildOfClass("Humanoid")
-                    if humanoid then
-                        humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
-                    end
-                end)
-            end
-        else
-            if _G.infinJumpConnection then
-                _G.infinJumpConnection:Disconnect()
-                _G.infinJumpConnection = nil
-            end
+        if _G.infinJumpConnection then
+            _G.infinJumpConnection:Disconnect()
+            _G.infinJumpConnection = nil
         end
 
-        print("ViperX: Infinite Jump set to: " .. tostring(_G.infinjump))
-        sendNotification("ViperX", "Infinite Jump set to " .. tostring(_G.infinjump))
+        if _G.infinjump then
+            _G.infinJumpConnection = game:GetService("UserInputService").JumpRequest:Connect(function()
+                if _G.infinjump then
+                    game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):ChangeState("Jumping")
+                end
+            end)
+        end
     end)
 
     -- Jump Power Slider
@@ -279,3 +266,15 @@ if MainUI then
 else
     warn("ViperX: Failed to load.")
 end
+
+-- Automatically check for updates and destroy old versions
+if _G.ViperXLoaded then
+    -- Destroy the previous instance
+    local coreGui = game:GetService("CoreGui")
+    local oldViperX = coreGui:FindFirstChild("ViperX")
+    if oldViperX then
+        oldViperX:Destroy()
+    end
+end
+
+_G.ViperXLoaded = true
