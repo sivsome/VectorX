@@ -266,15 +266,3 @@ if MainUI then
 else
     warn("ViperX: Failed to load.")
 end
-
--- Automatically check for updates and destroy old versions
-if _G.ViperXLoaded then
-    -- Destroy the previous instance
-    local coreGui = game:GetService("CoreGui")
-    local oldViperX = coreGui:FindFirstChild("ViperX")
-    if oldViperX then
-        oldViperX:Destroy()
-    end
-end
-
-_G.ViperXLoaded = true
